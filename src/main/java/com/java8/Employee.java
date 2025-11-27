@@ -1,5 +1,7 @@
 package com.java8;
 
+import java.util.List;
+
 public class Employee {
     private int id;
     private String name;
@@ -9,9 +11,10 @@ public class Employee {
     private String deptName;
     private String city;
     private int yearOfJoining;
+    private List<String> skills;
 
     public Employee(int id, String name, int age, long salary, String gender, 
-                    String deptName, String city, int yearOfJoining) {
+                    String deptName, String city, int yearOfJoining, List<String> skills) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -20,6 +23,7 @@ public class Employee {
         this.deptName = deptName;
         this.city = city;
         this.yearOfJoining = yearOfJoining;
+        this.skills = skills;
     }
 
     @Override
@@ -33,6 +37,7 @@ public class Employee {
                 ", deptName='" + deptName + '\'' +
                 ", city='" + city + '\'' +
                 ", yearOfJoining='" + yearOfJoining + '\'' +
+                ", skills=" + skills +
                 '}';
     }
 
@@ -98,5 +103,13 @@ public class Employee {
 
     public void setYearOfJoining(int yearOfJoining) {
         this.yearOfJoining = yearOfJoining;
+    }
+
+    public List<String> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<String> skills) {
+        this.skills = skills;
     }
 }

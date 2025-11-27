@@ -6,8 +6,10 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.DoubleSummaryStatistics;
+import java.util.stream.Collector;
 
 public class StreamExample {
     public static void main(String[] args) {
@@ -89,26 +91,50 @@ public class StreamExample {
         Collectors.groupingBy(Employee:: getDeptName, 
          Collectors.collectingAndThen(Collectors.toList(),
              list->list.stream().sorted(Comparator.comparingDouble(Employee::getSalary).reversed()).skip(1).findFirst().orElse(null))));
-     
 
+      System.out.println(" ######## Partition employees by experience (>= 5 years)");
+      Map<Boolean, List<Employee>> experiencedEmployees = employees.stream()
+              .collect(Collectors.partitioningBy(e -> (2024 - e.getYearOfJoining()) >= 5));
+      System.out.println("Experienced employees: " + experiencedEmployees.get(true));
+      System.out.println("Inexperienced employees: " + experiencedEmployees.get(false));
 
+      System.out.println(" ######## Get all unique skills of employees");
+      List<String> uniqueSkills = employees.stream()
+              .flatMap(e -> e.getSkills().stream())
+              .distinct()
+              .collect(Collectors.toList());
+      System.out.println("Unique skills: " + uniqueSkills);
 
+      System.out.println(" ######## Calculate average and total salary using teeing collector");
+      Map<String, Double> avgAndTotalSalary = employees.stream().collect(
+              Collectors.teeing(
+                      Collectors.averagingDouble(Employee::getSalary),
+                      Collectors.summingDouble(Employee::getSalary),
+                      (avg, total) -> {
+                          Map<String, Double> map = new java.util.HashMap<>();
+                          map.put("average", avg);
+                          map.put("total", total);
+                          return map;
+                      }
+              )
+      );
+      System.out.println("Average and total salary: " + avgAndTotalSalary);
     }
 
     
     private static List<Employee> initializeEmployeedata(){
 
         List<Employee> empList = new ArrayList<>();
-        empList.add(new Employee(1, "abc", 28, 123, "F", "HR", "Blore", 2020));
-        empList.add(new Employee(2, "xyz", 29, 120, "F", "HR", "Hyderabad", 2015));
-        empList.add(new Employee(3, "efg", 30, 115, "M", "HR", "Chennai", 2014));
-        empList.add(new Employee(4, "def", 32, 125, "F", "HR", "Chennai", 2013));
+        empList.add(new Employee(1, "abc", 28, 123, "F", "HR", "Blore", 2020, Arrays.asList("Java", "Python")));
+        empList.add(new Employee(2, "xyz", 29, 120, "F", "HR", "Hyderabad", 2015, Arrays.asList("Recruiting", "Data Analysis")));
+        empList.add(new Employee(3, "efg", 30, 115, "M", "HR", "Chennai", 2014, Arrays.asList("Java", "Spring")));
+        empList.add(new Employee(4, "def", 32, 125, "F", "HR", "Chennai", 2013, Arrays.asList("Python", "SQL")));
 
-        empList.add(new Employee(5, "ijk", 22, 150, "F", "IT", "Noida", 2013));
-        empList.add(new Employee(6, "mno", 27, 140, "M", "IT", "Gurugram", 2017));
-        empList.add(new Employee(7, "uvw", 26, 130, "F", "IT", "Pune", 2016));
-        empList.add(new Employee(8, "pqr", 23, 145, "M", "IT", "Trivandam", 2015));
-        empList.add(new Employee(9, "stv", 25, 160, "M", "IT", "Blore", 2010));
+        empList.add(new Employee(5, "ijk", 22, 150, "F", "IT", "Noida", 2013, Arrays.asList("Java", "JavaScript")));
+        empList.add(new Employee(6, "mno", 27, 140, "M", "IT", "Gurugram", 2017, Arrays.asList("Angular", "React")));
+        empList.add(new Employee(7, "uvw", 26, 130, "F", "IT", "Pune", 2016, Arrays.asList("SQL", "NoSQL")));
+        empList.add(new Employee(8, "pqr", 23, 145, "M", "IT", "Trivandam", 2015, Arrays.asList("Java", "AWS")));
+        empList.add(new Employee(9, "stv", 25, 160, "M", "IT", "Blore", 2010, Arrays.asList("Spring", "Hibernate")));
         return empList;
     }
 }
