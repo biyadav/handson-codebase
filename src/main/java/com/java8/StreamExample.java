@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.DoubleSummaryStatistics;
-import java.util.stream.Collector;
 
 public class StreamExample {
     public static void main(String[] args) {
@@ -121,6 +122,37 @@ public class StreamExample {
       System.out.println("Average and total salary: " + avgAndTotalSalary);
     }
 
+    System.out.println(" ######## MERGE/ CONCATENATE TWO STREAMS");
+
+    Stream<String> stream1 = Stream.of("A", "B", "C");
+    Stream<String> stream2 = Stream.of("D", "E", "F");
+    Stream<String> concatenated = Stream.concat(stream1, stream2);
+    // Result: ["A", "B", "C", "D", "E", "F"]. 
+
+    System.out.println(" ######## Use filtering collector"); 
+
+    List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+    List<Integer> evenNumbers = numbers.stream()
+    .collect(Collectors.filtering(
+        n -> n % 2 == 0,
+        Collectors.toList()
+    ));
+    // Result: [2, 4]
+
+
+        System.out.println(" ######## Most Frequent Element in a List"); 
+
+        List<String> words = Arrays.asList("apple", "banana", "apple", "orange", "banana", "apple");
+        String mostFrequent = words.stream()
+        .collect(Collectors.groupingBy(
+                Function.identity(),
+                Collectors.counting()
+        ))
+        .entrySet().stream()
+        .max(Map.Entry.comparingByValue())
+        .map(Map.Entry::getKey)
+        .orElse(null);
+        // Result: "apple"
     
     private static List<Employee> initializeEmployeedata(){
 
