@@ -1,4 +1,4 @@
-package com.java8;
+package com.JAVA8.stream;
 
 import java.util.List;
 import java.util.Map;
@@ -120,7 +120,7 @@ public class StreamExample {
               )
       );
       System.out.println("Average and total salary: " + avgAndTotalSalary);
-    }
+    
 
     System.out.println(" ######## MERGE/ CONCATENATE TWO STREAMS");
 
@@ -134,7 +134,7 @@ public class StreamExample {
     List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
     List<Integer> evenNumbers = numbers.stream()
     .collect(Collectors.filtering(
-        n -> n % 2 == 0,
+        num -> num % 2 == 0,
         Collectors.toList()
     ));
     // Result: [2, 4]
@@ -143,7 +143,7 @@ public class StreamExample {
         System.out.println(" ######## Most Frequent Element in a List"); 
 
         List<String> words = Arrays.asList("apple", "banana", "apple", "orange", "banana", "apple");
-        String mostFrequent = words.stream()
+        words.stream()
         .collect(Collectors.groupingBy(
                 Function.identity(),
                 Collectors.counting()
@@ -153,7 +153,7 @@ public class StreamExample {
         .map(Map.Entry::getKey)
         .orElse(null);
         // Result: "apple"
-    
+    }
     private static List<Employee> initializeEmployeedata(){
 
         List<Employee> empList = new ArrayList<>();

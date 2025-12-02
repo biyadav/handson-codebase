@@ -1,4 +1,4 @@
-package com.java8;
+package com.JAVA8.stream;
 
 import java.util.List;
 
