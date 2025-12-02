@@ -99,6 +99,11 @@ public class StreamExample {
       System.out.println("Experienced employees: " + experiencedEmployees.get(true));
       System.out.println("Inexperienced employees: " + experiencedEmployees.get(false));
 
+      System.out.println(" ######## group by department and value as list of empname in that dept ");
+      Map<String,List<String>> deptWiseEmpNames= employees.stream().collect(Collectors.groupingBy(Employee::getDeptName,
+        Collectors.mapping(Employee::getName,Collectors.toList()))); // without mapping List of Employees
+        deptWiseEmpNames.forEach((k,v)->System.out.println("Dept "+k +"EmpNames"+v));
+
       System.out.println(" ######## Get all unique skills of employees");
       List<String> uniqueSkills = employees.stream()
               .flatMap(e -> e.getSkills().stream())
