@@ -6,11 +6,14 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.DoubleSummaryStatistics;
+import java.util.IntSummaryStatistics;
 
 public class StreamExample {
     public static void main(String[] args) {
@@ -158,7 +161,34 @@ public class StreamExample {
         .map(Map.Entry::getKey)
         .orElse(null);
         // Result: "apple"
+
+        System.out.println(" ########  Find the longest string"); 
+
+        List<String> names = Arrays.asList("John", "Jane", "Christopher", "Doe");
+       Optional<String> longestName = names.stream()
+        .max(Comparator.comparingInt(String::length));
+       // Result: Optional["Christopher"]
+         
+        /* primitive  Stream  */
+        IntStream intStream = IntStream.of(1, 2, 3, 4, 5);
+        DoubleStream doubleStream = DoubleStream.of(1.0, 2.0, 3.0);
+
+        Stream<Integer> infiniteStream = Stream.generate(() -> 1) .limit(5);
+        // Result: [1, 1, 1, 1, 1]. 
+
+        Stream<Integer> iterateEx = Stream.iterate(0, n -> n + 2).limit(5);
+         // Result: [0, 2, 4, 6, 8]
+
+         System.out.println(" ########  calculate summary statistics"); 
+        List<Integer> forStats = Arrays.asList(1, 2, 3, 4, 5);
+        IntSummaryStatistics stats = forStats.stream()
+       .mapToInt(Integer::intValue).summaryStatistics();
+       // stats: count=5, sum=15, min=1, max=5, average=3.0
+ 
     }
+
+   
+    // https://medium.com/@gaddamnaveen192/50-hands-on-java-stream-examples-you-cant-miss-10dbefcff9d9
     private static List<Employee> initializeEmployeedata(){
 
         List<Employee> empList = new ArrayList<>();

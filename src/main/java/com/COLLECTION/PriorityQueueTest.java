@@ -1,12 +1,11 @@
 package com.COLLECTION;
 
-import com.JAVA8.functionalinterface.A;
 import com.JAVA8.stream.Employee;
-
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class PriorityQueueTest {
+  
     public static void main(String[] args) {
 
     // Element added to PriorityQueue either need to implement comparable or comparator implementaion should be passed.
