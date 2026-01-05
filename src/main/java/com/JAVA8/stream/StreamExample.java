@@ -176,7 +176,7 @@ public class StreamExample {
         Stream<Integer> infiniteStream = Stream.generate(() -> 1) .limit(5);
         // Result: [1, 1, 1, 1, 1]. 
 
-        Stream<Integer> iterateEx = Stream.iterate(0, n -> n + 2).limit(5);
+        Stream<Integer> iterateEx = Stream.iterate(0, x -> x + 2).limit(5);
          // Result: [0, 2, 4, 6, 8]
 
          System.out.println(" ########  calculate summary statistics"); 

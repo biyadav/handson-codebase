@@ -1,6 +1,13 @@
-com/JAVA8/functionalinterface/A.class
+com/JAVA8/OptionalExample.class
 com/JAVA8/functionalinterface/AB.class
+com/COLLECTION/CollectionBasic.class
+com/JAVA8/stream/Employee.class
+com/COLLECTION/PriorityQueueTest.class
+com/JAVA8/functionalinterface/B.class
+com/COLLECTION/ConcurrentHasMapTest.class
+com/JAVA8/functionalinterface/A.class
+com/JAVA8/lambda/LambdaTest.class
 com/JAVA8/stream/StreamExample.class
 com/JAVA8/functionalinterface/FunctionalInterfaceTest.class
-com/JAVA8/stream/Employee.class
-com/JAVA8/functionalinterface/B.class
+com/JAVA8/lambda/BinaryOperator.class
+com/COLLECTION/QueueTest.class
