@@ -24,13 +24,13 @@ public class CollectionBasic {
 
         List<String> myList = Arrays.asList("hello","namaste","bye");
         // myList.add("GM");// java.lang.UnsupportedOperationException
-        //myList.add(1,"GM");
+        myList.add(1,"GM");// UnsupportedOperationException 
 
         List<String> unmodifiableList = Collections.unmodifiableList(new ArrayList<String>());
         //unmodifiableList.add("Abc");  // java.lang.UnsupportedOperationException
 
 
-      CollectionHierracy 
+     
         
 
 
